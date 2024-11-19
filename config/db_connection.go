@@ -18,7 +18,7 @@ func OpenConnectionPostgresSQL() (*sql.DB, error) {
 	port := "5432"         //os.Getenv("5432")
 	user := "postgres"     //os.Getenv("postgres")
 	password := "postgres" //os.Getenv("postgres")
-	dbname := "db_belajar" //os.Getenv("user")
+	dbname := "postgres" //os.Getenv("user")
 
 	psqlMerge := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)

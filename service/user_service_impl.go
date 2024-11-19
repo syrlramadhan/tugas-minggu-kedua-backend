@@ -2,9 +2,11 @@ package service
 
 import (
 	"context"
-	"github.com/google/uuid"
+	"errors"
 	"golang-database-user/model"
 	"golang-database-user/repository"
+
+	"github.com/google/uuid"
 )
 
 type UserServiceImpl struct {
@@ -45,4 +47,25 @@ func (userService UserServiceImpl) CreateUser(ctx context.Context, userModel mod
 	}
 
 	return insertUser
+}
+
+func (userService UserServiceImpl) ReadUsers(ctx context.Context) ([]model.MstUser, error) {
+	users, err := userService.UserRepository.ReadUsers(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return users, nil
+}
+
+func (userService UserServiceImpl) DeleteUser(ctx context.Context, userId string) error {
+	if userId == "" {
+		return errors.New("ID user tidak boleh kosong")
+	}
+
+	err := userService.UserRepository.DeleteUser(ctx, userId)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

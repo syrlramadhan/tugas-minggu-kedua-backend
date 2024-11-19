@@ -42,6 +42,10 @@ func main() {
 		switch {
 		case scan == 1:
 			controller.CreateUser(userService)
+		case scan == 3:
+			controller.ReadUser(userService)
+		case scan == 4:
+			controller.DeleteUser(userService)
 		default:
 			controller.DefaultChoose()
 		}
