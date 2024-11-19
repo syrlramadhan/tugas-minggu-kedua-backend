@@ -28,10 +28,10 @@ func (repo *userRepositoryImpl) InsertUser(ctx context.Context, user model.MstUs
 	return user, nil
 }
 
-func (repo *userRepositoryImpl) UpdateUser(ctx context.Context, user model.MstUser) (model.MstUser, error) {
-	query := "UPDATE FROM mst_user WHERE id_user = $1"
+func (repo *userRepositoryImpl) UpdateUser(ctx context.Context, user model.MstUser, userId string) (model.MstUser, error) {
+	query := "UPDATE mst_user SET name = $1, email = $2, password = $3, phone_number = $4 WHERE id_user = $5"
 
-	_, err := repo.DB.ExecContext(ctx, query, user.IdUser, user.Name, user.Email, user.Password, user.PhoneNumber, user.Role.IdRole)
+	_, err := repo.DB.ExecContext(ctx, query, user.Name, user.Email, user.Password, user.PhoneNumber, userId)
 	if err != nil {
 		return model.MstUser{}, err
 	}

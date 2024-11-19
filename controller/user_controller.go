@@ -37,6 +37,34 @@ func CreateUser(userService service.UserService) {
 	fmt.Println(mstUser)
 }
 
+func UpdateUser(userService service.UserService) {
+	ctx := context.Background()
+
+	var userId, nama, email, password, hp string
+	fmt.Print("Masukkan id user yang ingin di update: ")
+	fmt.Scanln(&userId)
+
+	fmt.Print("Masukkan nama : ")
+	fmt.Scan(&nama)
+	fmt.Print("Masukkan email : ")
+	fmt.Scan(&email)
+	fmt.Print("Masukkan password : ")
+	fmt.Scan(&password)
+	fmt.Print("Masukkan nomor hp : ")
+	fmt.Scan(&hp)
+
+	user := model.MstUser{
+		Name:        nama,
+		Email:       email,
+		Password:    password,
+		PhoneNumber: hp,
+	}
+
+	mstUser := userService.UpdateUser(ctx, user, userId)
+
+	fmt.Println(mstUser)
+}
+
 func ReadUser(userService service.UserService) {
 	ctx := context.Background()
 

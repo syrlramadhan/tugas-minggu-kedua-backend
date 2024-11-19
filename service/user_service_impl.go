@@ -49,6 +49,22 @@ func (userService UserServiceImpl) CreateUser(ctx context.Context, userModel mod
 	return insertUser
 }
 
+func (userService UserServiceImpl) UpdateUser(ctx context.Context, userModel model.MstUser, userId string) model.MstUser {
+	user := model.MstUser{
+		Name:        userModel.Name,
+		Email:       userModel.Email,
+		Password:    userModel.Password,
+		PhoneNumber: userModel.PhoneNumber,
+	}
+
+	updateUser, err := userService.UserRepository.UpdateUser(ctx, user, userId)
+	if err != nil {
+		panic(err)
+	}
+
+	return updateUser
+}
+
 func (userService UserServiceImpl) ReadUsers(ctx context.Context) ([]model.MstUser, error) {
 	users, err := userService.UserRepository.ReadUsers(ctx)
 	if err != nil {
