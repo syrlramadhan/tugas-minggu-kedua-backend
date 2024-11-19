@@ -1,10 +1,13 @@
 package controller
 
 import (
+	"bufio"
 	"context"
 	"fmt"
 	"golang-database-user/model"
 	"golang-database-user/service"
+	"os"
+	"strings"
 )
 
 func DefaultChoose() {
@@ -12,18 +15,25 @@ func DefaultChoose() {
 }
 
 func CreateUser(userService service.UserService) {
+	reader := bufio.NewReader(os.Stdin)
 
 	ctx := context.Background()
 
-	var nama, email, password, hp string
-	fmt.Print("Masukkan nama : ")
-	fmt.Scan(&nama)
-	fmt.Print("Masukkan email : ")
-	fmt.Scan(&email)
-	fmt.Print("Masukkan password : ")
-	fmt.Scan(&password)
-	fmt.Print("Masukkan nomor hp : ")
-	fmt.Scan(&hp)
+	fmt.Print("Masukkan nama: ")
+	nama, _ := reader.ReadString('\n')
+	nama = strings.TrimSpace(nama)
+
+	fmt.Print("Masukkan email: ")
+	email, _ := reader.ReadString('\n')
+	email = strings.TrimSpace(email)
+
+	fmt.Print("Masukkan password: ")
+	password, _ := reader.ReadString('\n')
+	password = strings.TrimSpace(password)
+
+	fmt.Print("Masukkan nomor HP: ")
+	hp, _ := reader.ReadString('\n')
+	hp = strings.TrimSpace(hp)
 
 	user := model.MstUser{
 		Name:        nama,
@@ -38,20 +48,29 @@ func CreateUser(userService service.UserService) {
 }
 
 func UpdateUser(userService service.UserService) {
+	reader := bufio.NewReader(os.Stdin)
+
 	ctx := context.Background()
 
-	var userId, nama, email, password, hp string
+	var userId string
 	fmt.Print("Masukkan id user yang ingin di update: ")
 	fmt.Scanln(&userId)
 
-	fmt.Print("Masukkan nama : ")
-	fmt.Scan(&nama)
-	fmt.Print("Masukkan email : ")
-	fmt.Scan(&email)
-	fmt.Print("Masukkan password : ")
-	fmt.Scan(&password)
-	fmt.Print("Masukkan nomor hp : ")
-	fmt.Scan(&hp)
+	fmt.Print("Masukkan nama: ")
+	nama, _ := reader.ReadString('\n')
+	nama = strings.TrimSpace(nama)
+
+	fmt.Print("Masukkan email: ")
+	email, _ := reader.ReadString('\n')
+	email = strings.TrimSpace(email)
+
+	fmt.Print("Masukkan password: ")
+	password, _ := reader.ReadString('\n')
+	password = strings.TrimSpace(password)
+
+	fmt.Print("Masukkan nomor HP: ")
+	hp, _ := reader.ReadString('\n')
+	hp = strings.TrimSpace(hp)
 
 	user := model.MstUser{
 		Name:        nama,
