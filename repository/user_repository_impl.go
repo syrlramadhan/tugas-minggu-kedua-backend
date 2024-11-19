@@ -15,6 +15,18 @@ func NewUserRepositoryImpl(db *sql.DB) UserRepository {
 	return &userRepositoryImpl{DB: db}
 }
 
+func (repo *userRepositoryImpl) EmailExists(ctx context.Context, email string) (bool, error) {
+	query := "SELECT COUNT(1) FROM mst_user WHERE email = $1"
+
+	var count int
+	err := repo.DB.QueryRowContext(ctx, query, email).Scan(&count)
+	if err != nil {
+		return false, err
+	}
+
+	return count > 0, nil
+}
+
 // InsertUser : fungsi untuk melakukan query ke dalam database. ( contoh di bawah ini adalah fungsi untuk membuat data user )
 func (repo *userRepositoryImpl) InsertUser(ctx context.Context, user model.MstUser) (model.MstUser, error) {
 

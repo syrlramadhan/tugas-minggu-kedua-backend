@@ -24,6 +24,14 @@ func NewUserServiceImpl(userRepository repository.UserRepository, roleRepository
 // CreateUser : Fungsi untuk melakukan validasi dan logika pada program.
 // contohnya jika anda di suruh untuk melakukan validasi untuk pengecekan nomor hp yang tidak boleh sama di dalam table mst_user
 func (userService UserServiceImpl) CreateUser(ctx context.Context, userModel model.MstUser) model.MstUser {
+	emailExists, err := userService.UserRepository.EmailExists(ctx, userModel.Email)
+	if err != nil {
+		return model.MstUser{}
+	}
+
+	if emailExists {
+		panic("Email sudah terdaftar")
+	}
 
 	uuidUser := uuid.New().String()
 
