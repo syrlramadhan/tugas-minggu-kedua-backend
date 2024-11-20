@@ -52,7 +52,7 @@ func (repo *userRepositoryImpl) UpdateUser(ctx context.Context, user model.MstUs
 }
 
 func (repo *userRepositoryImpl) ReadUsers(ctx context.Context) ([]model.MstUser, error) {
-	query := "SELECT id_user, name, email, phone_number FROM mst_user"
+	query := "SELECT u.id_user, u.name, u.email, u.phone_number, r.role_name FROM mst_user u LEFT JOIN mst_role r ON u.role_id = r.id_role"
 
 	rows, err := repo.DB.QueryContext(ctx, query)
 	if err != nil {
@@ -66,7 +66,7 @@ func (repo *userRepositoryImpl) ReadUsers(ctx context.Context) ([]model.MstUser,
 		var user model.MstUser
 		var role model.MstRole
 
-		err := rows.Scan(&user.IdUser, &user.Name, &user.Email, &user.PhoneNumber)
+		err := rows.Scan(&user.IdUser, &user.Name, &user.Email, &user.PhoneNumber, &role.RoleName)
 		if err != nil {
 			return nil, err
 		}

@@ -35,6 +35,18 @@ func CreateUser(userService service.UserService) {
 	hp, _ := reader.ReadString('\n')
 	hp = strings.TrimSpace(hp)
 
+	fmt.Println("\n"+`ROLE: (Keterangan : IdRole = Role Name)
+ROLE001 = Ketua Umum
+ROLE002 = Sekretaris Umum
+ROLE003 = Bendahara Umum
+ROLE004 = Departement Keorganisasian
+ROLE005 = Departement Pembelajaran
+ROLE006 = Departement Humas`)
+
+	fmt.Print("\nMasukkan id role: ")
+	role, _ := reader.ReadString('\n')
+	role = strings.TrimSpace(role)
+
 	user := model.MstUser{
 		Name:        nama,
 		Email:       email,
@@ -42,7 +54,7 @@ func CreateUser(userService service.UserService) {
 		PhoneNumber: hp,
 	}
 
-	mstUser := userService.CreateUser(ctx, user)
+	mstUser := userService.CreateUser(ctx, user, role)
 
 	fmt.Println(mstUser)
 }
@@ -95,11 +107,10 @@ func ReadUser(userService service.UserService) {
 
 	fmt.Println("\nAll Users:")
 	for _, mstUser := range users {
-		fmt.Println("Id : ", mstUser.IdUser, "\nNama : ", mstUser.Name, "\nEmail : ", mstUser.Email, "\nNomor HP : ", mstUser.PhoneNumber)
+		fmt.Println("Id : ", mstUser.IdUser, "\nNama : ", mstUser.Name, "\nEmail : ", mstUser.Email, "\nNomor HP : ", mstUser.PhoneNumber, "\nJabatan: ", mstUser.Role.RoleName)
 		fmt.Println()
 	}
 }
-
 
 func DeleteUser(userService service.UserService) {
 	ctx := context.Background()

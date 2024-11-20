@@ -16,3 +16,13 @@ CREATE TABLE mst_user (
         FOREIGN KEY (role_id)
         REFERENCES mst_role (id_role)
 );
+
+
+INSERT INTO mst_role (id_role, role_name) 
+VALUES
+    ('ROLE001', 'Ketua Umum'),
+    ('ROLE002', 'Sekretaris Umum'),
+    ('ROLE003', 'Bendahara Umum'),
+    ('ROLE004', 'Departement Keorganisasian'),
+    ('ROLE005', 'Departement Pembelajaran'),
+    ('ROLE006', 'Departement Humas');
