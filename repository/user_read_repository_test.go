@@ -20,8 +20,8 @@ func TestReadUserRepository_Success(t *testing.T) {
 
 	users, err := UserRepository.ReadUsers(ctx)
 
-	assert.NotNil(t, users)
-	assert.Nil(t, err)
+	assert.NotNil(t, users, "Data pengguna yang baca seharusnya tidak nil")
+	assert.Nil(t, err, "Seharusnya tidak ada error pada saat membaca pengguna")
 }
 
 func TestReadUserRepository_Fail(t *testing.T) {
@@ -36,5 +36,5 @@ func TestReadUserRepository_Fail(t *testing.T) {
 
 	_, err = UserRepository.ReadUsers(ctx)
 
-	assert.NotNil(t, err)
+	assert.NotNil(t, err, "Seharusnya terjadi error pada saat membaca pengguna")
 }

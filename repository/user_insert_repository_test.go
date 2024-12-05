@@ -41,8 +41,8 @@ func TestInsertUserRepository_Success(t *testing.T) {
 		panic(err)
 	}
 
-	assert.NotNil(t, insertUser)
-	assert.Nil(t, err)
+	assert.NotNil(t, insertUser, "Data pengguna yang buat seharusnya tidak nil")
+	assert.Nil(t, err, "Seharusnya tidak ada error pada insert pengguna")
 }
 
 func TestInsertUserRepository_EmailExists(t *testing.T) {
@@ -72,5 +72,5 @@ func TestInsertUserRepository_Fail(t *testing.T) {
 
 	_, err = UserRepository.InsertUser(ctx, user)
 
-	assert.NotNil(t, err)
+	assert.NotNil(t, err, "Seharusnya terjadi error pada saat insert pengguna")
 }

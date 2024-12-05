@@ -53,6 +53,6 @@ func TestUpdateUserRepository_Fail(t *testing.T) {
 
 	updateUser, err := UserRepository.UpdateUser(ctx, user, existingUserID)
 
-	assert.NotNil(t, err)
-	assert.Empty(t, updateUser.IdUser)
+	assert.NotNil(t, err, "Seharusnya terjadi error pada saat update pengguna")
+	assert.Empty(t, updateUser.IdUser, "Id pengguna yang diperbarui seharusnya kosong")
 }

@@ -26,8 +26,8 @@ func TestDeleteUserRepository_Success(t *testing.T) {
 
 	deleteUser, err := UserRepository.DeleteUser(ctx, userId)
 	
-	assert.Nil(t, err)
-	assert.NotNil(t, deleteUser)
+	assert.Nil(t, err, "Seharusnya tudakada error pada saat menghapus pengguna")
+	assert.NotNil(t, deleteUser, "Data pengguna yang dihapus seharusnya tidak nil")
 }
 
 func TestDeleteUserRepository_Fail(t *testing.T) {
@@ -45,6 +45,6 @@ func TestDeleteUserRepository_Fail(t *testing.T) {
 
     deleteUser, err := UserRepository.DeleteUser(ctx, userId)
 
-    assert.NotNil(t, err)
-    assert.Equal(t, "", deleteUser.IdUser)
+    assert.NotNil(t, err, "Seharusnya terjadi error pada saat menghapus pengguna")
+    assert.Equal(t, "", deleteUser.IdUser, "Id pengguna yang ingin di hapus seharusnya nil")
 }
