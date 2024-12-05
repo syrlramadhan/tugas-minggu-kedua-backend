@@ -119,7 +119,7 @@ func DeleteUser(userService service.UserService) {
 	fmt.Print("Masukkan id user yang ingin di hapus: ")
 	fmt.Scanln(&userId)
 
-	err := userService.DeleteUser(ctx, userId)
+	_, err := userService.DeleteUser(ctx, userId)
 	if err != nil {
 		fmt.Println("Gagal menghapus user:", err)
 	} else {

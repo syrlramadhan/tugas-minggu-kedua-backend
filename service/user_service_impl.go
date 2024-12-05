@@ -81,15 +81,15 @@ func (userService UserServiceImpl) ReadUsers(ctx context.Context) ([]model.MstUs
 	return users, nil
 }
 
-func (userService UserServiceImpl) DeleteUser(ctx context.Context, userId string) error {
+func (userService UserServiceImpl) DeleteUser(ctx context.Context, userId string) (model.MstUser, error) {
 	if userId == "" {
-		return errors.New("ID user tidak boleh kosong")
+		return model.MstUser{}, errors.New("ID user tidak boleh kosong")
 	}
 
-	err := userService.UserRepository.DeleteUser(ctx, userId)
+	deleteUser, err := userService.UserRepository.DeleteUser(ctx, userId)
 	if err != nil {
-		return err
+		return deleteUser, err
 	}
 
-	return nil
+	return deleteUser, nil
 }
